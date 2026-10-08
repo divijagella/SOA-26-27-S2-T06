@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AegisCore — API Security Monitoring</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="shield">◆</span> AegisCore</div>
+    <p class="muted">API SECURITY PLATFORM</p>
+    <nav>
+      <button class="nav active" onclick="showPage('overview', this)">Overview</button>
+      <button class="nav" onclick="showPage('endpoints', this)">Endpoints</button>
+      <button class="nav" onclick="showPage('threats', this)">Threats</button>
+      <button class="nav" onclick="showPage('logs', this)">Security Logs</button>
+    </nav>
+    <div class="side-bottom">
+      <div class="status-dot"></div> System operational
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <div class="eyebrow">SECURITY CENTER</div>
+        <h1 id="pageTitle">API Security Overview</h1>
+      </div>
+      <button class="refresh" onclick="refreshData()">↻ Refresh</button>
+    </header>
+
+    <section id="overview" class="page">
+      <div class="cards">
+        <div class="card"><span>Protected Endpoints</span><strong id="endpointsCount">24</strong><small>+3 this month</small></div>
+        <div class="card"><span>Requests Today</span><strong id="requests">128,492</strong><small>+12.4% vs yesterday</small></div>
+        <div class="card"><span>Threats Blocked</span><strong id="blocked">347</strong><small>Last 24 hours</small></div>
+        <div class="card"><span>Security Score</span><strong class="score">94%</strong><small>Excellent protection</small></div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-head"><h2>Request Activity</h2><span class="badge">LIVE</span></div>
+          <div class="chart">
+            <div class="bars">
+              <i style="height:35%"></i><i style="height:55%"></i><i style="height:43%"></i>
+              <i style="height:70%"></i><i style="height:52%"></i><i style="height:82%"></i>
+              <i style="height:64%"></i><i style="height:91%"></i><i style="height:76%"></i>
+              <i style="height:97%"></i><i style="height:80%"></i><i style="height:88%"></i>
+            </div>
+          </div>
+          <div class="chart-labels"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Recent Threats</h2><button class="link" onclick="showPage('threats')">View all</button></div>
+          <div class="threat"><b>SQL Injection</b><span class="danger">BLOCKED</span><small>api.example.com/users · 2 min ago</small></div>
+          <div class="threat"><b>Brute Force</b><span class="warning">BLOCKED</span><small>/auth/login · 8 min ago</small></div>
+          <div class="threat"><b>Suspicious IP</b><span class="danger">BLOCKED</span><small>203.0.113.45 · 14 min ago</small></div>
+          <div class="threat"><b>Rate Limit</b><span class="safe">MITIGATED</span><small>/api/search · 21 min ago</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="endpoints" class="page hidden">
+      <div class="panel">
+        <div class="panel-head"><h2>Protected API Endpoints</h2><button class="primary" onclick="addEndpoint()">+ Add Endpoint</button></div>
+        <table><thead><tr><th>Endpoint</th><th>Method</th><th>Status</th><th>Requests</th><th>Risk</th></tr></thead>
+        <tbody id="endpointTable"></tbody></table>
+      </div>
+    </section>
+
+    <section id="threats" class="page hidden">
+      <div class="panel">
+        <div class="panel-head"><h2>Threat Detection</h2><span class="badge">REAL-TIME</span></div>
+        <div id="threatList"></div>
+      </div>
+    </section>
+
+    <section id="logs" class="page hidden">
+      <div class="panel">
+        <div class="panel-head"><h2>Security Logs</h2><button class="primary" onclick="clearLogs()">Clear</button></div>
+        <div id="logsList" class="logs"></div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
